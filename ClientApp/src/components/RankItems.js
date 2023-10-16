@@ -1,5 +1,6 @@
 ﻿
 import React, { useState, useEffect } from 'react';
+import GameImageArr from "./GameImages.js";
 
 export const RankItems = () => {
 
@@ -16,10 +17,20 @@ export const RankItems = () => {
             })
     }, []);
     return (
-        (items != null) ?
-             items.map((item) => <h3>{item.title}</h3>)
-            :
-        <div>Loading</div>
+        <main>
+            <div className="items-not-ranked">
+                {
+                    (items.length > 0) ?
+                        items.map((item) =>
+                        <div className="unranked-cell">
+                            <img id={`item-${item.id}`} src={GameImageArr.find(p => p.id === item.imageId)?.image} />
+                        </div>
+                        )
+                        :
+                        <div>Loading...</div>
+                }
+            </div>
+        </main>
 
     );
 }
