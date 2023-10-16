@@ -1,14 +1,13 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using RankingApp.Models;
 namespace RankingApp.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]
 	public class ItemController : ControllerBase
 	{
-		public ItemController()
-		{
-		}
+		private static readonly IEnumerable<itemModel> Items;
 	}
 }
 
