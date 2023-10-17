@@ -1,6 +1,7 @@
 ﻿
 import React, { useState, useEffect } from 'react';
 import GameImageArr from "./GameImages.js";
+import RankingGrid from './RankingGrid.js';
 
 export const RankItems = () => {
 
@@ -18,6 +19,7 @@ export const RankItems = () => {
     }, []);
     return (
         <main>
+            <RankingGrid items={items} imgArr={GameImageArr} />
             <div className="items-not-ranked">
                 {
                     (items.length > 0) ?
