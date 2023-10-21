@@ -1,7 +1,7 @@
-﻿const RankingGrid = ({items, imgArr }) => {
+﻿const RankingGrid = ({ items, imgArr }) => {
     const rankingGrid = [];
     const cellCollectionTopTier = [];
-    const cellCollectionMidTier = [];
+    const cellCollectionMiddleTier = [];
     const cellCollectionBottomTier = [];
     const cellCollectionWorstTier = [];
 
@@ -23,27 +23,29 @@
         var label = "";
         const numCells = 5;
 
-        for (var b = 1; b <= numCells; b++) {
-            rankNum = (b === 1) ? 0 : (numCells * (rowNum - 1)) + b - rowNum;
+        for (var a = 1; a <= numCells; a++) {
+            rankNum = (a === 1) ? 0 : (numCells * (rowNum - 1)) + a - rowNum;
+
+            if (rowNum === 1) {
+                currCollection = cellCollectionTopTier;
+                label = "Top Tier";
+            }
+            else if (rowNum === 2) {
+                currCollection = cellCollectionMiddleTier;
+                label = "Middle Tier";
+            }
+            else if (rowNum === 3) {
+                currCollection = cellCollectionBottomTier;
+                label = "Bottom Tier";
+            }
+            else if (rowNum === 4) {
+                currCollection = cellCollectionWorstTier;
+                label = "Worst Tier";
+            }
+            pushCellMarkupToArr(currCollection, rankNum, label);
+
         }
 
-        if (rowNum === 1) {
-            currCollection = cellCollectionTopTier;
-            label = "Top Tier";
-        }
-        else if (rowNum === 2) {
-            currCollection = cellCollectionMidTier;
-            label = "Mid Tier";
-        }
-        else if (rowNum === 3) {
-            currCollection = cellCollectionBottomTier;
-            label = "Bottom Tier";
-        }
-        else if (rowNum === 4) {
-            currCollection = cellCollectionWorstTier;
-            label = "Worst Tier";
-        }
-        pushCellMarkupToArr(currCollection, rankNum, label);
     }
 
     function createCellsForRows() {
@@ -54,8 +56,9 @@
     }
 
     function createRowsForGrid() {
+
         rankingGrid.push(<div className="rank-row top-tier">{cellCollectionTopTier}</div>);
-        rankingGrid.push(<div className="rank-row mid-tier">{cellCollectionMidTier}</div>);
+        rankingGrid.push(<div className="rank-row middle-tier">{cellCollectionMiddleTier}</div>);
         rankingGrid.push(<div className="rank-row bottom-tier">{cellCollectionBottomTier}</div>);
         rankingGrid.push(<div className="rank-row worst-tier">{cellCollectionWorstTier}</div>);
 
@@ -71,7 +74,7 @@
         <div className="rankings">
             {createRankingGrid()}
         </div>
-    )
+    );
 }
 
 export default RankingGrid;
